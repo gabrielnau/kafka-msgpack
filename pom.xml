@@ -1,0 +1,70 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.kodosenshi</groupId>
+    <artifactId>kafka-msgpack</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>kafka-msgpack</name>
+    <url>https://github.com/venerguevarra/kafka-msgpack.tesuto</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <javasdk.version>1.8</javasdk.version>
+        <msgpack.version>0.6.12</msgpack.version>
+        <kafka.version>0.9.0.1</kafka.version>
+        <mavencompiler.version>2.3.1</mavencompiler.version>
+        <junit.version>4.11</junit.version>
+        <mockito.version>1.8.5</mockito.version>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka_2.10</artifactId>
+            <version>${kafka.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.msgpack</groupId>
+            <artifactId>msgpack</artifactId>
+            <version>${msgpack.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${mavencompiler.version}</version>
+                <configuration>
+                    <source>${javasdk.version}</source>
+                    <target>${javasdk.version}</target>
+                    <jvmArgs>
+                        <jvmArg>-Xms512m</jvmArg>
+                        <jvmArg>-Xmx1024m</jvmArg>
+                    </jvmArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+        <finalName>kafka-msgpack</finalName>
+    </build>
+</project>
