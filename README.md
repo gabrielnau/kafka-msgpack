@@ -4,6 +4,44 @@
     # A project that implements Apache Kafka consumer and producer that uses Message Pack java library
 
 #### DEVELOPER SETUP
+    PREREQUISITE
+        Java 8 SDK Installed
+        Maven 3 Installed
+        
+        Environment Variables SET
+        JAVA_HOME=<JAVA_INSTALLATION_DIRECTORY>
+        MAVEN_HOME=<MAVEN_INSTALLATION_DIRECTORY>
+        
+    WINDOWS SETUP
+        1.) Download and extract Zookeeper 3.4.8(http://mirror.rise.ph/apache/zookeeper/)
+        - Open a Command Prompt
+        $ cd C:\zookeeper-3.4.8\conf
+        $ ren zoo_sample.cfg zoo.cfg
+        
+        - Using a text editor(notepad++), edit C:\zookeeper-3.4.8\conf\
+        - Replace the line "dataDir=/tmp/zookeeper" to dataDir=C:\zookeeper-3.4.8\data
+        - Add System Environment Variable 
+            ZOOKEEPER_HOME=C:\zookeeper-3.4.8\
+        - Update Path system variable, in the end of the value add
+            ;%ZOOKEEPER_HOME%\bin
+        - Open a new command prompt
+            $ zkserver
+            
+        2.) Download and extract kafka_2.11-0.9.0.1.tgz(http://kafka.apache.org/downloads.html) to drive C:
+        - Open a Command Prompt
+        - Using a text editor(e.g. Notedpad++) edit C:\kafka_2.11-0.9.0.1\config\server.properties
+        - Replace the line "log.dirs=/tmp/kafka-logs" to "log.dir= C:\kafka_2.11-0.9.0.1\kafka-logs"
+        
+        - If Zookeeper runs in a different maching edit "zookeeper.connect=localhost:2181, 
+          replace localhost to the host IP address and port number. 
+          
+        - Kafka will run on default port 9092 & connect to zookeeper’s default port which is 2181.
+        
+        3.) Creating a Kafka topic
+        - Open a new command prompt 
+          $ cd C:\kafka_2.11-0.9.0.1\bin\windows
+          $ kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test-messages
+
     MAC OS/X SETUP
     
         1.) Homebrew Installation
@@ -66,6 +104,11 @@
         Delete a topic
         set delete.topic.enable=true in the server broker properties file(e.g. server.properties)
         $ kafka-topics --zookeeper 127.0.0.1:2181 --delete --topic test-messages
+        
+    USEFUL KAFKA COMMANDS
+        List Topics: kafka-topics --list --zookeeper localhost:2181
+        Describe Topic: kafka-topics --describe --zookeeper localhost:2181 --topic [Topic Name]
+        Read messages from beginning: kafka-console-consumer --zookeeper localhost:2181 --topic [Topic Name] --from-beginning
 
 #### HOW TO RUN
         $ mvn clean install 
